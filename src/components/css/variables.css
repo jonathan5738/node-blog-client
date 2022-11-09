@@ -2,4 +2,6 @@
     --font-family: 'Montserrat', sans-serif;
     --serif-font: 'Source Serif Pro', serif;;
     --green-color: #099268;
+    --desk-padd: 0 10rem;
+    --mobile-padd: 0 2rem;
 }

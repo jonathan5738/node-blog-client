@@ -1,0 +1,51 @@
+.dashboard-post-container {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+.dashboard-post-main-content {
+    padding: 0 3rem;
+}
+.dashboard-post-main-content h2 {
+    font-size: 3rem;
+}
+.created-post-container-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 2rem;
+    row-gap: 4rem;
+}
+.created-post-container-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 2rem;
+}
+.created-post-img img {
+    width: 100%;
+}
+.created-post-button {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+.created-post-button a {
+    display: inline-block;
+    padding: 1em 2em;
+    background-color: lightblue;
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+.created-post-paragraph {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+.created-post-paragraph-btn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.created-post-paragraphs {
+    border-top: 1px solid #eee;
+    margin-top: 4rem;
+}

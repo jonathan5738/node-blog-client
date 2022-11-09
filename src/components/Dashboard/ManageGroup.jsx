@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { blogGroupDetail, deleteBlogGroup } from '../../features/blogGroupSlice'
+import { blogGroupPrivateDetail, deleteBlogGroup } from '../../features/blogGroupSlice'
 import DashboardSideBar from './DashboardSideBar'
 import EditGroupForm from './forms/EditGroupForm'
 import '../css/Dashboard/ManageGroup.css'
@@ -13,9 +13,10 @@ function ManageGroup() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   useEffect(() => {
-     dispatch(blogGroupDetail(blog_id))
+     dispatch(blogGroupPrivateDetail(blog_id))
   }, [])
   const blogGroup = useSelector(state => state.blogGroups.data)
+  const members = blogGroup?.members
   const handleEditForm = () => {
      setPermissionForm(false); setEditForm(prev => !prev)
   }
@@ -51,7 +52,11 @@ function ManageGroup() {
                 <EditGroupForm blogGroup={blogGroup} blog_id={blog_id} />
             )}
             {!showEditForm && showPermissionForm && (
-                <AssignPermissionForm/>
+                <AssignPermissionForm 
+                    members={members} 
+                    blog_id={blogGroup?._id}
+                    authors={blogGroup?.authors}
+                />
             )}
         </div>
     </div>
