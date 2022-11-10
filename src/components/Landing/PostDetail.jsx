@@ -101,7 +101,7 @@ function PostDetail() {
                 </>
             )}
         </div>
-        <div className="content-right-sidebar">
+        <div className="content-right-sidebar content-height">
             <div className="content-right-sidebar-content">
                  <div className="author-info">
                      <div className="author-avatar">

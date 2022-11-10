@@ -184,7 +184,7 @@ p {
     text-decoration: none;
     color:#2f9e44;
 }
-.group-search-form {
+.group-search-form, .group-search-form-mobile {
     display: block;
     margin-top: 3rem;
 }
@@ -194,6 +194,9 @@ p {
     width: 25%;
     border-radius: 2rem;
     border: 1px solid #eee;
+}
+.group-search-form-mobile input {
+    display: none;
 }
 .related-group-list {
     width: 25%;
@@ -251,6 +254,9 @@ h3.paragraph-subtitle {
     .content-main {
         margin-top: 10rem;
     }
+    .content-height {
+        height: 80vh;
+    }
     .content-right-sidebar {
         margin-top: 0;
     }
@@ -307,5 +313,16 @@ h3.paragraph-subtitle {
     }
     .content-main h2 {
         font-size: 2.5rem;
+    }
+    .group-search-form input {
+        display: none;
+    }
+    .group-search-form-mobile input {
+        display: inline-block;
+        padding: 1em 0 1em 1em;
+        width: 100%;
+        border-radius: 2rem;
+        border: 1px solid #eee;
+        margin-bottom: 2rem;
     }
 }

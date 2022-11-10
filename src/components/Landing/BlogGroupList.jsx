@@ -5,7 +5,7 @@ import { FiHome, FiBell, FiMonitor } from "react-icons/fi"
 import { fetchCategories } from '../../features/categorySlice'
 import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
-
+import '../css/Landing/BlogGroupList.css'
 function BlogGroupList() {
   const currentUser = JSON.parse(localStorage.getItem(process.env.REACT_APP_USER_PROFILE))
   const [searchTerm, setSearchTerm] = useState('')
@@ -52,6 +52,12 @@ function BlogGroupList() {
         </div>
         <div className="content-main">
              <h2>{category_name}</h2>
+
+             <form className="group-search-form-mobile">
+                 <input type="text" className='search-form' placeholder='search'
+                  value={searchTerm} onChange={e => setSearchTerm(e.target.value) }/>
+             </form>
+
              <div className="blog-group-flex">
                  {blogGroups?.map(blogGroup => {
                     return (
