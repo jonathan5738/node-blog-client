@@ -13,6 +13,7 @@ import ManagePost from './components/Dashboard/ManagePost'
 
 import './components/css/variables.css'
 import './components/css/general.css'
+import './components/css/form.css'
 import ListCreatedPosts from './components/Dashboard/ListCreatedPosts'
 import PostList from './components/Landing/PostList'
 import PostDetail from './components/Landing/PostDetail'
