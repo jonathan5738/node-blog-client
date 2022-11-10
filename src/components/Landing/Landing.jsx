@@ -23,8 +23,8 @@ function Landing() {
             <a href="/" className='navbar-logo'>Readting</a>
             <ul className="menu">
               <li className='menu-item'><Link to="#">Our story</Link></li>
-              <li className='menu-item'><Link to="#">Sign in</Link></li>
-              <li className='menu-item'><Link to="#">Log in</Link></li>
+              <li className='menu-item'><Link to="/accounts/signin">Sign in</Link></li>
+              <li className='menu-item'><Link to="/accounts/login">Log in</Link></li>
             </ul>
         </nav>
       </header>
