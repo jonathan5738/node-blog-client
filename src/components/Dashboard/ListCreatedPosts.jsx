@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { listPostPrivate } from '../../features/postSlice'
 import { blogGroupDetail } from '../../features/blogGroupSlice'
+import { FiHome, FiEdit, FiMonitor, FiPlus } from 'react-icons/fi'
 import DashboardSideBar from './DashboardSideBar'
 import '../css/Dashboard/PostStyle.css'
 
@@ -16,9 +17,9 @@ function ListCreatedPosts() {
      dispatch(blogGroupDetail(blog_id))
   }, [])
   return (
-    <div className='dashboard-post-container'>
-        <DashboardSideBar/> 
-        <div className="dashboard-post-main-content">
+    <div className='content-container'>
+        <DashboardSideBar/>
+        <div className="content-main">
              <h2>{blogGroup?.name} articles</h2>
              <div className="created-post-container-grid-3">
                  {posts.map(post => {
@@ -40,6 +41,11 @@ function ListCreatedPosts() {
                  })}
              </div>
         </div>
+
+        <div className="content-right-sidebar">
+            <div className="content-right-sidebar-content"></div>
+        </div>
+
     </div>
   )
 }

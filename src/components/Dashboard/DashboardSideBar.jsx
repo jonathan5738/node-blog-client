@@ -1,16 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import { FiHome, FiEdit, FiMonitor, FiPlus } from 'react-icons/fi'
 function DashboardSideBar() {
   return (
-    <div className="dashboard-sidebar-container">
-        <div className="dashboard-sidebar">
-            <div className="dashboard-links">
-                <a href="/">Home</a>
-                <a href="/dashboard">Dashboard</a>
-                <Link to="/dashboard/blogs/groups/new">add group</Link>
+     <div className="content-left-sidebar">
+          <div className="content-left-sidebar-content content-left-sidebar-mobile">
+                  <div className="icons-container">
+                      <a href="/"><FiHome className='content-icon'size={20} color={"#777777"}/></a>
+                      <a href="/dashboard"><FiMonitor className='content-icon'size={20} color={"#777777"}/></a>
+                      <a href="/dashboard/blogs/groups/new"><FiPlus className='content-icon'size={20} color={"#777777"}/></a>
+                  </div>
             </div>
-        </div>
     </div>
   )
 }

@@ -251,17 +251,26 @@ h3.paragraph-subtitle {
     .content-main {
         margin-top: 10rem;
     }
+    .content-right-sidebar {
+        margin-top: 0;
+    }
+    .related-group-list {
+        margin-top: 4rem;
+    }
     .content-container {
         display: grid;
         grid-template-columns: 1fr;
     }
     .content-right-sidebar-content{
         width: 100%;
-        position: absolute;
-    }
-    .content-right-sidebar-content{
-        width: 100%;
         padding: 0 2rem;
+        position: relative;
+    }
+    .group-search-form input {
+        width: 100%;
+    }
+    .related-group-list {
+        width: 100%;
     }
     .icons-container {
         flex-direction: row;

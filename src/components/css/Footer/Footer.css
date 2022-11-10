@@ -3,6 +3,7 @@
     position: fixed;
     padding: 2rem 0;
     background-color: lightpink;
-    top: 0;
+    bottom: 0;
     z-index: 1000;
+    margin-top: 10rem;
 }

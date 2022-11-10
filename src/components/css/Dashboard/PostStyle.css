@@ -49,3 +49,13 @@
     border-top: 1px solid #eee;
     margin-top: 4rem;
 }
+
+@media(max-width: 700px){
+    .created-post-container-grid-3 {
+        grid-template-columns: 1fr;
+        row-gap: 2rem;
+    }
+    .created-post-card {
+        width: 100%;
+    }
+}

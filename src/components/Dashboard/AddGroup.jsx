@@ -28,9 +28,9 @@ function AddGroup() {
      navigate('/dashboard')
   }
   return (
-    <div className='dashboard-container'>
-        <DashboardSideBar/>
-        <div className="dashboard-add-group-form">
+    <div className='content-container'>
+          <DashboardSideBar/>
+        <div className="content-main">
             <h2>Create blog group</h2>
             <form action="" onSubmit={handleSubmit(handleDataSubmission)}>
             <div className="form-div">
@@ -65,6 +65,10 @@ function AddGroup() {
                 </div>
                 <button>create group</button>
             </form>
+        </div>
+
+        <div className="content-right-sidebar">
+            <div className="content-right-sidebar-content"></div>
         </div>
     </div>
   )

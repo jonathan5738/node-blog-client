@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { FiHome, FiBell } from "react-icons/fi"
+import { FiHome, FiBell, FiMonitor } from "react-icons/fi"
 import { blogGroupDetail } from '../../features/blogGroupSlice'
 import { listPosts } from '../../features/postSlice'
 import '../css/Landing/PostList.css'
 function PostList() {
   const { blog_id } = useParams()
+  const currentUser = JSON.parse(localStorage.getItem(process.env.REACT_APP_USER_PROFILE))
   const dispatch = useDispatch()
   const posts = useSelector(state => state.posts.data)
   const blogGroup = useSelector(state => state.blogGroups.data)
@@ -21,6 +22,9 @@ function PostList() {
                 <div className="icons-container">
                     <a href="/"><FiHome className='content-icon' size={20} color={"#777777"}/></a>
                     <FiBell className='content-icon' size={20} color={"#777777"}/>
+                    {currentUser?.user && (
+                        <a href="/dashboard"><FiMonitor className='content-icon'size={20} color={"#777777"}/></a>
+                    )}
                 </div>
            </div>
         </div>

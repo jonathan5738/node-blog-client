@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector} from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { FiHome, FiBell, FiThumbsUp, FiThumbsDown, FiMessageCircle, FiX } from "react-icons/fi"
+import { FiHome, FiBell, FiThumbsUp, FiThumbsDown, FiMessageCircle, FiX, FiMonitor } from "react-icons/fi"
 import { postDetail, likePost, dislikePost } from '../../features/postSlice'
 import { fetchRelatedPosts } from '../../features/relatedPostSlice'
 import { listComments, addComment, likeComment, dislikeComment } from '../../features/commentSlice'
@@ -43,6 +43,9 @@ function PostDetail() {
                 <div className="icons-container">
                     <a href="/"><FiHome className='content-icon' size={20} color={"#777777"}/></a>
                     <FiBell className='content-icon' size={20} color={"#777777"}/>
+                    {currentUser && (
+                        <a href="/dashboard"><FiMonitor className='content-icon'size={20} color={"#777777"}/></a>
+                    )}
                     <FiMessageCircle className='content-icon' onClick={() => setShowCommentSection(prev =>!prev)}
                      size={20} color={"#777777"}/>
                     {currentUser && blogGroup?.members?.includes(currentUser?.user?._id) && (

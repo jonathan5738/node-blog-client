@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { listBlogGroups, joinBlogGroup, searchListBlogGroups } from '../../features/blogGroupSlice'
-import { FiHome, FiBell } from "react-icons/fi"
+import { FiHome, FiBell, FiMonitor } from "react-icons/fi"
 import { fetchCategories } from '../../features/categorySlice'
 import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
@@ -44,6 +44,9 @@ function BlogGroupList() {
                <div className="icons-container">
                     <a href="/"><FiHome className='content-icon' size={20} color={"#777777"}/></a>
                     <FiBell className='content-icon' size={20} color={"#777777"}/>
+                    {currentUser && (
+                        <a href="/dashboard"><FiMonitor className='content-icon'size={20} color={"#777777"}/></a>
+                    )}
                 </div>
             </div>
         </div>

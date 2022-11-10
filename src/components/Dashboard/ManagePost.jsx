@@ -6,6 +6,7 @@ import AddParagraph from './forms/AddParagraph'
 
 import DashboardSideBar from './DashboardSideBar'
 import ArticleForm from './forms/ArticleForm'
+import '../css/Dashboard/PostStyle.css'
 
 function ManagePost() {
   const { blog_id, post_id} = useParams()
@@ -31,7 +32,7 @@ function ManagePost() {
     setParaToEdit(paraToEdit)
   }
   return (
-    <div className='dashboard-post-container'>
+    <div className='content-container'>
         <DashboardSideBar/>
         <div className="dashboard-post-main-content">
             <div className="created-post-container-grid-2">

@@ -5,17 +5,17 @@ import { listBlogGroupPrivate } from '../../features/blogGroupSlice'
 import { fectchJoinedGroups } from '../../features/joinedGroupSlice'
 
 import EditUserForm from '../accounts/EditUserForm'
-import DashboardSideBar from './DashboardSideBar'
 import ResetPassword from '../accounts/ResetPassword'
 import '../css/Dashboard/Dashboard.css'
 import { Link } from 'react-router-dom'
+import DashboardSideBar from './DashboardSideBar'
+
 
 function Dashboard() {
   const dispatch = useDispatch()
   const currentUser = useSelector(state => state.accounts.data)
   const createdBlogGroups = useSelector(state => state.blogGroups.data)
-  const joinedGroups = useSelector(state => state.joinedGroups.data )
-  const [blogGroupSelected, setBlogGroupSelected] = useState({})
+  const joinedGroups = useSelector(state => state.joinedGroups.data)
   const [showEditUserForm, setEditUserForm] = useState(false)
   const [showResetPasswordForm, setShowResetPasswordForm] = useState(false)
   useEffect(() => {
@@ -38,9 +38,9 @@ function Dashboard() {
 //      setBlogGroupSelected(group)
 //   }
   return (
-    <div className='dashboard-container'>
-         <DashboardSideBar/>
-         <div className="dashboar-user-content">
+    <div className='content-container'>
+        <DashboardSideBar/>
+         <div className="content-main">
              <h2>Welcome {currentUser.first_name} </h2>
              <div className="dashboard-user-manage">
                  <p>username: {currentUser?.username}</p>
@@ -50,67 +50,73 @@ function Dashboard() {
                 <button className='edit-button' onClick={handleEditUserForm}>edit user</button>
                 <button className='reset-password-btn' onClick={handlePasswordResetForm}>reset password</button>
              </div>
-         </div>
-         <div className="dashboard-blog-content">
-          {!showEditUserForm && !showResetPasswordForm && (
-             <>
-                <div>
-                  {createdBlogGroups.length > 0 && (
-                      <>
-                         <h2>created blog group</h2>
-                        <div className="list-created-blog-group">
-                              {createdBlogGroups instanceof Array && createdBlogGroups?.map(blogGroup => {
-                                 return (
-                                    <div className="blog-group-card" key={blogGroup._id}>
-                                       <h4>{blogGroup.name}</h4>
-                                       <p>{blogGroup.description.slice(0, 103)}{blogGroup.description.length > 103 ? '...': ''}</p>
-                                       <a href={`/dashboard/blogs/groups/${blogGroup._id}/manage`}  className='manage-group-link'>manage group</a>
-                                    </div>
-                                 )
-                              })}
-                        </div>
-                      </>
-                  )}
-                </div>
-                <div className="list-joined-groups-container">
-                  {joinedGroups.length > 0 && (
-                       <>
-                          <h2>Groups joined</h2>
-                           <div className="list-joined-groups">
-                                 {joinedGroups.map(joinGroup => {
-                                    return (
-                                       <a href="#" key={joinGroup._id}>
-                                          <div className="joined-group-card">
-                                             <div className="joined-group-img">
-                                                <img src={joinGroup?.blog_img.url} alt="" />
-                                             </div>
-                                             <div>
-                                                   <p>{joinGroup.name}</p>
-                                                   {joinGroup.authors.includes(currentUser._id) && (
-                                                      <div className='joined-group-author-links'>
-                                                         <Link to={`/dashboard/blogs/groups/${joinGroup._id}/posts/new`}>write article</Link>
-                                                         <a href={`/dashboard/blogs/groups/${joinGroup._id}/posts/all`}>Manage articles</a>
-                                                      </div>
-                                                   )}
-                                             </div>
-                                          </div>
-                                       </a>
-                                    )
-                                 })}
-                           </div>
-                       </>
-                  )}
-                </div>
-             </>
-          )}
-          {showEditUserForm && !showResetPasswordForm && (
+
+             {showEditUserForm && !showResetPasswordForm && (
              <EditUserForm currentUser={currentUser}
              handleEditUserForm={handleEditUserForm}
              />
-          )}
-          {!showEditUserForm && showResetPasswordForm && (
-             <ResetPassword handlePasswordResetForm={handlePasswordResetForm}/>
-          )}
+            )}
+            {!showEditUserForm && showResetPasswordForm && (
+               <ResetPassword handlePasswordResetForm={handlePasswordResetForm}/>
+            )}
+         </div>
+
+
+         <div className="content-right-sidebar">
+            <div className="content-right-sidebar-content">
+                  <>
+                     <div>
+                        {createdBlogGroups.length > 0 && (
+                           <>
+                              <h2>created blog group</h2>
+                              <div className="list-created-blog-group">
+                                    {createdBlogGroups instanceof Array && createdBlogGroups?.map(blogGroup => {
+                                       return (
+                                          <div className="blog-group-card" key={blogGroup._id}>
+                                             <h4>{blogGroup.name}</h4>
+                                             <p>{blogGroup.description.slice(0, 103)}{blogGroup.description.length > 103 ? '...': ''}</p>
+                                             <a href={`/dashboard/blogs/groups/${blogGroup._id}/manage`}  className='manage-group-link'>manage group</a>
+                                          </div>
+                                       )
+                                    })}
+                              </div>
+                           </>
+                        )}
+                     </div>
+                     <div className="list-joined-groups-container">
+                        {joinedGroups.length > 0 && (
+                           <>
+                              <h2>Groups joined</h2>
+                                 <div className="list-joined-groups">
+                                       {joinedGroups.map(joinGroup => {
+                                          return (
+                                             <a href="#" key={joinGroup._id}>
+                                                <div className="joined-group-card">
+                                                   <div className="joined-group-img">
+                                                      <img src={joinGroup?.blog_img.url} alt="" />
+                                                   </div>
+                                                   <div>
+                                                         <p>{joinGroup.name}</p>
+                                                         {joinGroup.authors.includes(currentUser._id) && (
+                                                            <div className='joined-group-author-links'>
+                                                               <Link to={`/dashboard/blogs/groups/${joinGroup._id}/posts/new`}>write article</Link>
+                                                               <a href={`/dashboard/blogs/groups/${joinGroup._id}/posts/all`}>Manage articles</a>
+                                                            </div>
+                                                         )}
+                                                   </div>
+                                                </div>
+                                             </a>
+                                          )
+                                       })}
+                                 </div>
+                           </>
+                        )}
+                     </div>
+                  </>
+                  
+            </div>
+          
+          
          </div>
     </div>
   )
