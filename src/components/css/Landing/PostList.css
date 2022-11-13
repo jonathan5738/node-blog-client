@@ -113,6 +113,7 @@
     border-left: 1px solid #eee;
     overflow-y: scroll;
     padding-bottom: 3rem;
+    z-index: 2500;
 }
 .comment-icon-container{
     display: flex;
