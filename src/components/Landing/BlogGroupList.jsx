@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { listBlogGroups, joinBlogGroup, searchListBlogGroups } from '../../features/blogGroupSlice'
-import { FiHome, FiBell, FiMonitor } from "react-icons/fi"
+import { FiHome, FiBell, FiMonitor, FiArrowLeft, FiArrowRight } from "react-icons/fi"
 import { fetchCategories } from '../../features/categorySlice'
+import { blogGroupCount } from '../../features/numberBlogGroupSlice'
 import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import '../css/Landing/BlogGroupList.css'
 function BlogGroupList() {
   const currentUser = JSON.parse(localStorage.getItem(process.env.REACT_APP_USER_PROFILE))
   const [searchTerm, setSearchTerm] = useState('')
+  const [skipParam, setSkipParam] = useState(0)
   const dispatch = useDispatch()
   const location = useLocation()
   const category_name = location.search.split('=')[1]
   const [debouncedTerm, setDebouncedTerm] = useState(searchTerm)
   const {status, data: categories} = useSelector(state => state.categories)
+  const blogGroupLength = useSelector(state => state.blogGroupCount.data)
     useEffect(() => {
         dispatch(fetchCategories())
-        dispatch(listBlogGroups(category_name))
+        dispatch(listBlogGroups({category_name}))
     }, [])
 
     useEffect(() => {
@@ -28,14 +31,20 @@ function BlogGroupList() {
         }
     }, [searchTerm])
 
+    useEffect(() => {
+        dispatch(listBlogGroups({category_name, skipParam}))
+     }, [skipParam])
+
    useEffect(() => {
     dispatch(searchListBlogGroups({searchTerm, category_name}))
+    dispatch(blogGroupCount({category_name, searchTerm}))
    }, [debouncedTerm])
 
   const blogGroups = useSelector(state => state.blogGroups.data)
   const handlejoinBlogGroup = (blog_id, user_id) => {
      dispatch(joinBlogGroup({blog_id, user_id, category_name}))
   }
+
   return (
     <div className='content-container'>
         <div className="content-left-sidebar">
@@ -96,6 +105,20 @@ function BlogGroupList() {
                             )}
                     </>
                  )}
+
+            <div className="pagination-container">
+                    <div className="pagination-links">
+                        {skipParam >= 1 && (
+                            <FiArrowLeft size={20} color={'#868e96'} className='pagination-left'
+                            onClick={() => setSkipParam(prev => prev - 3)}/>
+                        )}
+                       
+                        <FiArrowRight size={20} color={'#868e96'} className='pagination-right'
+                        onClick={() => setSkipParam(prev => prev + 3)}/>
+                   
+                    </div>
+                </div>
+
              </div>
         </div>
         <div className="content-right-sidebar">

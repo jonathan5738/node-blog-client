@@ -165,8 +165,8 @@ const blogGroupSlice = createSlice({
     }
 })
 export const blogGroupReducer = blogGroupSlice.reducer 
-export const listBlogGroups = createAsyncThunk('blogGroups/listBlogGroups', async (category_name=null) => {
-    const response = await API.get(`/blogs/all?category_name=${category_name}`)
+export const listBlogGroups = createAsyncThunk('blogGroups/listBlogGroups', async ({category_name=null, skipParam=null}) => {
+    const response = await API.get(`/blogs/all?category_name=${category_name}&skipParam=${skipParam || 0}`)
     return response.data
 })
 export const createBlogGroup = createAsyncThunk('blogGroups/createBlogGroup', async (data) => {
@@ -177,8 +177,6 @@ export const topFiveBlogGroups = createAsyncThunk('blogGroups/topFiveBlogGroups'
   const response = await API.get('/blogs/top/five')
   return response.data
 })
-
-
 
 export const blogGroupDetail = createAsyncThunk('blogGroups/blogGroupDetail', async (blog_id) =>{
     const response = await API.get(`/blogs/${blog_id}/detail`)
