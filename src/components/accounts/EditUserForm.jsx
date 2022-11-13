@@ -21,18 +21,20 @@ function EditUserForm({ currentUser, handleEditUserForm }) {
         <h2 className='form-action-title'>Edit your account</h2>
         <form onSubmit={handleSubmit} className="form">
              <div className="form-div">
-                 <input type="text" aria-label='username' value={username} onChange={e => setUsername(e.target.value)} />
+                 <input type="text" aria-label='username' autoComplete='off'
+                  value={username} onChange={e => setUsername(e.target.value)} />
              </div>
              <div className="form-div">
-                 <input type="text" aria-label='first name'
+                 <input type="text" aria-label='first name' autoComplete='off'
                   value={firstName} onChange={e => setFirstName(e.target.value)} />
              </div>
              <div className="form-div">
-                 <input type="text" aria-label='last name'
+                 <input type="text" aria-label='last name' autoComplete='off'
                   value={lastName} onChange={e => setLastName(e.target.value)} />
              </div>
              <div className="form-div">
-                 <input type="text"  value={email} onChange={e => setEmail(e.target.value)}/>
+                 <input type="text" aria-label='email' autoComplete='off'
+                   value={email} onChange={e => setEmail(e.target.value)}/>
              </div>
              <button>edit user</button>
         </form>

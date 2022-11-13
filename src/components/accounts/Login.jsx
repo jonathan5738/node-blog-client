@@ -18,7 +18,7 @@ function Login() {
               <h3>Log in user</h3>
               <form action="" onSubmit={handleSubmit(handleSubmittedData)} className="form">
                   <div className="form-div">
-                      <input type="text" placeholder='username' aria-label='username'
+                      <input type="text" placeholder='username' aria-label='username' autoComplete='off'
                         {...register('username', { required: true })}
                       />
                       {errors.username && <p role="alert" className='form-error'>username required</p>}
