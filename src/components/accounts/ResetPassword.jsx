@@ -12,9 +12,9 @@ function ResetPassword({ handlePasswordResetForm }) {
       navigate('/dashboard', { replace: true })
   }
   return (
-    <div>
-        <h2>Reset your password</h2>
-        <form onSubmit={handleSubmit(handleDataSubmit)}>
+    <div className='account-form-container'>
+        <h2 className='form-action-title'>Reset your password</h2>
+        <form onSubmit={handleSubmit(handleDataSubmit)} className="form">
            <div className="form-div">
                 <input type="password" placeholder='oldPassword' aria-label='oldPassword'
                   {...register('oldPassword', { required: true })}

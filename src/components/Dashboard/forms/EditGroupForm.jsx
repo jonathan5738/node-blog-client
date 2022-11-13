@@ -18,8 +18,8 @@ function EditGroupForm({blogGroup, blog_id}) {
   }
   return (
     <div>
-        <h2>Edit blog group</h2>
-        <form onSubmit={handleSubmit}>
+        <h2 className='form-action-title'>Edit blog group</h2>
+        <form onSubmit={handleSubmit} className="form">
              <div className="form-div">
                  <input type="text" value={name} onChange={e => setName(e.target.value)} />
              </div>

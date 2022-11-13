@@ -19,8 +19,8 @@ function AssignPermissionForm({ members, blog_id, authors }) {
   console.log(authors)
   return (
     <div>
-      <h3>Assign author permission</h3>
-        <form action="" onSubmit={handleSubmit}>
+      <h3 className='form-action-title'>Assign author permission</h3>
+        <form action="" onSubmit={handleSubmit} className="form">
             <div className="form-div">
                 <input type="text" value={name} placeholder='username' 
                 onChange={e => handleInputChange(e.target.value)}/>

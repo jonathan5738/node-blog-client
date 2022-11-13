@@ -49,7 +49,7 @@ function SignIn() {
                     </div>
                     <button>sign in</button>
                 </form>
-                <Link to="/accounts/login">Would you like to login?</Link>
+                <Link to="/accounts/login" className='form-auth-link'>Would you like to login?</Link>
               </div>
           </div>
 

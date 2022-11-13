@@ -13,7 +13,7 @@ function BlogGroupList() {
   const location = useLocation()
   const category_name = location.search.split('=')[1]
   const [debouncedTerm, setDebouncedTerm] = useState(searchTerm)
-  const categories = useSelector(state => state.categories.data)
+  const {status, data: categories} = useSelector(state => state.categories)
     useEffect(() => {
         dispatch(fetchCategories())
         dispatch(listBlogGroups(category_name))
@@ -59,32 +59,44 @@ function BlogGroupList() {
              </form>
 
              <div className="blog-group-flex">
-                 {blogGroups?.map(blogGroup => {
-                    return (
-                          <div className="blog-group-section" key={blogGroup._id}>
-                              <div className="blog-group-section-text">
-                                <h3>{blogGroup?.name}</h3>
-                                <p>{blogGroup?.description}</p>
-                                <div className='blog-group-section-text-links'>
-                                    {currentUser && !blogGroup?.members?.includes(currentUser?.user._id) && (
-                                        <button className='join-btn' onClick={() => handlejoinBlogGroup(blogGroup._id, currentUser?.user?._id)}>start following</button>
-                                    )}
-                                    <a href={`/blogs/${blogGroup._id}/posts/all`} className='read-article-link' key={blogGroup._id}>read articles</a>
-                                </div>
-                                <div className="bagde-container">
-                                        <span className="bagde">{category_name}</span>
-                                        {blogGroup?.members?.includes(currentUser?.user._id) && (
-                                        <span className="bagde bagde-black">member of {blogGroup?.name}</span>
-                                 )}
-                                </div>
-                                </div>
-                                <div className="blog-group-section-img">
-                                    <img src={blogGroup?.blog_img?.url} alt="" />
-                                </div>
-                           </div>
-                        // </a>
-                    )
-                 })}
+                 {status === 'pending' ? (
+                    <div class="loader">Loading...</div>
+                 ): (
+                    <>
+                        {blogGroups?.length > 0 ? (
+                    <>
+                                {blogGroups?.map(blogGroup => {
+                                    return (
+                                        <div className="blog-group-section" key={blogGroup._id}>
+                                            <div className="blog-group-section-text">
+                                                <h3>{blogGroup?.name}</h3>
+                                                <p>{blogGroup?.description}</p>
+                                                <div className='blog-group-section-text-links'>
+                                                    {currentUser && !blogGroup?.members?.includes(currentUser?.user._id) && (
+                                                        <button className='join-btn' onClick={() => handlejoinBlogGroup(blogGroup._id, currentUser?.user?._id)}>start following</button>
+                                                    )}
+                                                    <a href={`/blogs/${blogGroup._id}/posts/all`} className='read-article-link' key={blogGroup._id}>read articles</a>
+                                                </div>
+                                                <div className="bagde-container">
+                                                        <span className="bagde">{category_name}</span>
+                                                        {blogGroup?.members?.includes(currentUser?.user._id) && (
+                                                        <span className="bagde bagde-black">member of {blogGroup?.name}</span>
+                                                )}
+                                                </div>
+                                                </div>
+                                                <div className="blog-group-section-img">
+                                                    <img src={blogGroup?.blog_img?.url} alt="" />
+                                                </div>
+                                        </div>
+                                        // </a>
+                                    )
+                                })}
+                                </>
+                            ): (
+                                <p className='empty-category-message'>No {category_name} groups has been created yet</p>
+                            )}
+                    </>
+                 )}
              </div>
         </div>
         <div className="content-right-sidebar">

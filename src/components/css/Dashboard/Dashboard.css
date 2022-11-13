@@ -4,8 +4,9 @@
     gap: 2rem;
 }
 .blog-group-card {
-    padding: .7em 2em 1em 2rem;
-    border: 1px solid #c5c5c5;
+    padding: 2em 2em 2em 2rem;
+    border: 1px solid #dddddd;
+    border-radius: .4rem;
 }
 .blog-group-card h4 {
     font-size: 1.4rem;
@@ -13,18 +14,20 @@
 }
 .manage-group-link {
     display: inline-block;
-    padding: .5rem;
+    padding: .7rem;
     border: 1px solid #919191;
     color: #919191;
     text-decoration: none;
+    border-radius: inherit;
 }
 .dashboar-user-content {
     padding: 0 3rem;
 }
 .dashboard-user-manage {
     width: 100%;
-    padding: 1em;
-    border:1px solid #c5c5c5 ;
+    border:1px solid #dddddd ;
+    padding: 1rem 2rem 1.8rem 2rem;
+    border-radius: .4rem;
 }
 
 .list-joined-groups {
@@ -49,4 +52,11 @@
     display: flex;
     align-items: center;
     gap: 3rem;
+}
+.list-joined-groups-container a {
+    text-decoration: none;
+    color: #333;
+}
+.list-created-group {
+    margin-top: 5rem;
 }

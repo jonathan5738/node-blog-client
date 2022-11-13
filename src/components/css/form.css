@@ -20,14 +20,6 @@
     font-family: var(--font-family);
 }
 
-.two-fiels input {
-    display: inline-block;
-    padding: 1.5rem 0 1.5rem 0;
-    border-radius: 4rem;
-    border: 1px solid #eee;
-    padding-left: 2rem;
-    font-family: var(--font-family);
-}
 .form button {
     display: inline-block;
     padding: 1.4rem 0 1.4rem 0;
@@ -37,13 +29,40 @@
     border-radius: 4rem;
     font-family: var(--font-family);
 }
-
-
+.form-auth-link {
+    display: inline-block;
+    margin-top: 3rem;
+}
+.form-div textarea {
+    width: 100%;
+    border-radius: 1rem;
+    border: 1px solid #eee;
+    font-family: var(--font-family);
+    padding-left: 2rem;
+    padding-top: 2rem;
+    line-height: 1.5;
+    font-size: 1.4rem;
+}
+.form-div select {
+    width: 100%;
+    padding: 1.5rem 1rem 1.5rem 1rem;
+    border-radius: 4rem;
+    border: 1px solid #eee;
+    font-family: var(--font-family);
+}
+.account-form-container {
+    margin-top: 5rem;
+    padding-top: 3rem;
+    border-top: 1px solid #eee;
+}
 @media(max-width: 714px){
-    .auth-form-container h3 {
-        font-size: 2rem;
+    .form-action-title {
+        font-size: 1.4rem;
     }
     .auth-form-container {
         padding: var(--mobile-padd);
+    }
+    .auth-form-container h3 {
+        font-size: 2rem;
     }
 }

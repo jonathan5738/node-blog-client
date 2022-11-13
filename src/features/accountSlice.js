@@ -7,6 +7,12 @@ const accountSlice = createSlice({
         error: null,
         status: null
     },
+    reducers: {
+      logoutUser: (state) => {
+        state.data = {}
+        localStorage.removeItem(process.env.REACT_APP_USER_PROFILE)
+      }
+    },
     extraReducers(builder){
         builder
           .addCase(signUser.fulfilled, (state, action) => {
@@ -74,6 +80,7 @@ const accountSlice = createSlice({
 })
 
 export const accountReducer = accountSlice.reducer 
+export const logoutUser = accountSlice.actions.logoutUser
 export const signUser = createAsyncThunk('accounts/signUser', async (data) => {
     const response = await API.post('/accounts/signin', data)
     return response.data

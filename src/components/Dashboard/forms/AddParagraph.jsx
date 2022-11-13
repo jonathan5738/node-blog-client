@@ -31,8 +31,8 @@ function AddParagraph({ post_id, blog_id, setShowParagraphForm, paraToEdit}) {
   }
   return (
     <div>
-        <h3>Add paragraph</h3>
-        <form onSubmit={handleSubmit}>
+        <h3 className='form-action-title'>Add paragraph</h3>
+        <form onSubmit={handleSubmit} className="form">
             <div className="form-div">
                 <input type="text" placeholder='subtitle' value={subtitle} onChange={e => setSubtitle(e.target.value)}
                 aria-label='subtitle' />
@@ -43,9 +43,9 @@ function AddParagraph({ post_id, blog_id, setShowParagraphForm, paraToEdit}) {
             <div className="form-div">
                 <textarea placeholder='content' arial-label='content' value={content}
                 onChange={ e => setContent(e.target.value)}
-                rows="5"></textarea>
+                rows="7"></textarea>
             </div>
-            <button>submit</button>
+            <button>add paragraph</button>
         </form>
     </div>
   )

@@ -7,7 +7,7 @@ import { fetchRelatedPosts } from '../../features/relatedPostSlice'
 import { listComments, addComment, likeComment, dislikeComment } from '../../features/commentSlice'
 import { blogGroupDetail } from '../../features/blogGroupSlice'
 import { motion } from 'framer-motion'
-
+import { FiUser } from 'react-icons/fi'
 
 function PostDetail() {
   const variants = {
@@ -20,10 +20,10 @@ function PostDetail() {
   const [showCommentSection, setShowCommentSection] = useState(false)
   const { blog_id, post_id } = useParams()
   const dispatch = useDispatch()
-  const { post, paragraphs } = useSelector(state => state.posts.data)
-  const relatedPosts = useSelector(state => state.relatedPosts.data)
-  const blogGroup = useSelector(state => state.blogGroups.data)
-  const comments = useSelector(state => state.comments.data)
+  const {status: postStatus, data: {post, paragraphs} } = useSelector(state => state.posts)
+  const {status: relatedPostStatus, data: relatedPosts} = useSelector(state => state.relatedPosts)
+  const {status: blogGroupStatus, data: blogGroup} = useSelector(state => state.blogGroups)
+  const {status:commentsStatus, data: comments} = useSelector(state => state.comments)
   useEffect(() => {
      dispatch(listComments({blog_id, post_id}))
      dispatch(postDetail({ blog_id, post_id }))
@@ -105,34 +105,41 @@ function PostDetail() {
             <div className="content-right-sidebar-content">
                  <div className="author-info">
                      <div className="author-avatar">
-                         <div className="img"></div>
+                         <div className="img">
+                            <FiUser size={25} className="author-icon" color={'#cccccc'}/>
+                         </div>
                      </div>
                      <div className="author-text">
                          <h3>{post?.author?.username}</h3>
                          <span className="role">author</span>
                      </div>
                  </div>
-                 {relatedPosts?.length > 0 && (
-                     <div className="related-post-container">
-                        <h2>More from {post?.group?.name}</h2>
-                        {relatedPosts?.filter(post => post._id !== post_id).map(post => {
-                            return (
-                                <a href={`/blogs/${blog_id}/posts/${post._id}`} key={post?._id}>
-                                    <div className="related-post-card">
-                                    <div className="related-post-card-text">
-                                         <span>{post?.author?.username}</span>
-                                         <h3>{post?.title}</h3>
-                                    </div>
-                                    <div className="related-post-card-img">
-                                        <img src={post?.post_img?.url} alt="" />
-                                    </div>
-                                   </div>
-                                </a>
-                            )
-                        })}
-                     </div>
+                 {relatedPostStatus === 'pending' ? (
+                    <div className="loader">loading...</div>
+                 ): (
+                    <>
+                    {relatedPosts?.length > 0 && (
+                        <div className="related-post-container">
+                           <h2>More from {post?.group?.name}</h2>
+                           {relatedPosts?.filter(post => post._id !== post_id).map(post => {
+                               return (
+                                   <a href={`/blogs/${blog_id}/posts/${post._id}`} key={post?._id}>
+                                       <div className="related-post-card">
+                                       <div className="related-post-card-text">
+                                            <span>{post?.author?.username}</span>
+                                            <h3>{post?.title}</h3>
+                                       </div>
+                                       <div className="related-post-card-img">
+                                           <img src={post?.post_img?.url} alt="" />
+                                       </div>
+                                      </div>
+                                   </a>
+                               )
+                           })}
+                        </div>
+                    )}
+                    </>
                  )}
-     
             </div>
           </div>
        </div>
@@ -148,7 +155,7 @@ function PostDetail() {
                  <FiX size={24} color={"#777777"} onClick={() => setShowCommentSection(prev => !prev)}
                   className='close-comment-icon'/>
              </div>
-            <form onSubmit={handleCommentSubmition}>
+            <form onSubmit={handleCommentSubmition} className="form">
                 <div className="form-div">
                     <input type="text" placeholder='title' aria-label='title'
                     value={title} onChange={e => setTitle(e.target.value)} />

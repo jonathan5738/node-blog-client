@@ -35,6 +35,7 @@ function ManagePost() {
     <div className='content-container'>
         <DashboardSideBar/>
         <div className="dashboard-post-main-content">
+            <h3 className='dashboard-post-main-title'>Edit {post?.title}</h3>
             <div className="created-post-container-grid-2">
                 {post && (
                      <div className="created-post-card">
@@ -48,8 +49,8 @@ function ManagePost() {
                              <p>paragraphs: {paragraphs.length}</p>
                          )}
                          <div className="created-post-button">
-                              <button onClick={handlePostEdit}>edit post</button>
-                              <button onClick={handleParagraphAddition}>add paragraph</button>
+                              <button className='created-post-edit-btn' onClick={handlePostEdit}>edit post</button>
+                              <button className='created-post-para-btn' onClick={handleParagraphAddition}>add paragraph</button>
                          </div>
                      </div>
                      {paragraphs && (
@@ -58,11 +59,11 @@ function ManagePost() {
                             <div className="created-post-paragraphs-flex">
                                 {paragraphs.map(paragraph => {
                                     return (
-                                        <div className="created-post-paragraph"key={paragraph?._id}>
-                                            <p>{paragraph?.subtitle}</p>
+                                        <div className="created-post-paragraph" key={paragraph?._id}>
+                                            <p className='para-title'>{paragraph?.subtitle}</p>
                                             <div className="created-post-paragraph-btn">
-                                                <button onClick={() => handleParagraphEdit(paragraph)}>edit</button>
-                                                <button>delete </button>
+                                                <button className='edit-paragraph-btn' onClick={() => handleParagraphEdit(paragraph)}>edit</button>
+                                                <button className='delete-paragraph-btn'>delete </button>
                                             </div>
                                         </div>
                                     )

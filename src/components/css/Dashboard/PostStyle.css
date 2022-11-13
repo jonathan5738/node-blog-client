@@ -17,7 +17,7 @@
 .created-post-container-grid-2 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    column-gap: 2rem;
+    column-gap: 4rem;
 }
 .created-post-img img {
     width: 100%;
@@ -29,16 +29,24 @@
 }
 .created-post-button a {
     display: inline-block;
-    padding: 1em 2em;
-    background-color: lightblue;
+    width: 100%;
+    padding: 1.3em 2em;
+    background-color:#0ca678;;
     text-decoration: none;
     font-size: 1.1rem;
+    color: #fff;
+    border-radius: 3rem;
+    text-align: center;
 }
-
+.dashboard-post-main-title {
+    font-size: 1.6rem;
+    padding-bottom: 1.6rem;
+    padding-top: 1.5rem;
+}
 .created-post-paragraph {
     display: flex;
     align-items: center;
-    gap: 3rem;
+    justify-content: space-between;
 }
 .created-post-paragraph-btn {
     display: flex;
@@ -49,8 +57,82 @@
     border-top: 1px solid #eee;
     margin-top: 4rem;
 }
+.edit-paragraph-btn, .delete-paragraph-btn {
+    display: inline-block;
+    padding: .5em 1em;
+    font-family: var(--font-family);
+    color: #fff;
+    border: 1px solid transparent;
+    border-radius: 3rem;
+} 
+.edit-paragraph-btn {
+    background-color: #0ca678;
+}
+.delete-paragraph-btn { 
+    background-color: #f03e3e;
+}
+.edit-paragraph-btn:hover, .delete-paragraph-btn:hover {
+    cursor: pointer;
+}
+.para-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
 
+.created-post-button button {
+    display: block;
+    width: 100%;
+    padding: 1.2em 0;
+    font-family: var(--font-family);
+    font-size: 1.1rem;
+    color: #fff;
+    border: 1px solid transparent;
+    border-radius: 3rem;
+}
+.created-post-edit-btn {
+    background-color: #0ca678;
+}
+.created-post-para-btn {
+    background-color: #000;
+}
+.created-post--btn
+.created-post-button button:hover {
+    cursor: pointer;
+}
+.delete-article-btn {
+    background-color: #000;
+}
 @media(max-width: 700px){
+    .dashboard-post-main-title {
+        font-size: 1.6rem;
+        padding-bottom: 1.6rem;
+    }
+    .created-post-form {
+        margin-top: 5rem;
+        border-top: 1px solid #eee;
+        padding-bottom: 5rem;
+    }
+    .created-post-button {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .created-post-button button {
+        display: block;
+        width: 100%;
+        padding: 1.3em 0;
+        font-family: var(--font-family);
+        font-size: 1.1rem;
+        color: #fff;
+        border: 1px solid transparent;
+        border-radius: 3rem;
+    }
+    .delete-article-btn {
+        background-color: #000;
+    }
+    .created-post-container-grid-2 {
+        grid-template-columns: 1fr;
+    }
     .created-post-container-grid-3 {
         grid-template-columns: 1fr;
         row-gap: 2rem;

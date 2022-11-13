@@ -31,12 +31,7 @@ function Dashboard() {
      setEditUserForm(false)
      setShowResetPasswordForm(prev => !prev)
   }
-//   const handleArticleForm = (group) => {
-//      setEditUserForm(false)
-//      setShowResetPasswordForm(false)
-//      setShowArticleForm(true)
-//      setBlogGroupSelected(group)
-//   }
+
   return (
     <div className='content-container'>
         <DashboardSideBar/>
@@ -47,10 +42,31 @@ function Dashboard() {
                  <p>email: {currentUser?.email}</p>
                  <p>fullname: {currentUser?.first_name} {currentUser?.last_name}</p>
                 <h3>Manage your account</h3>
-                <button className='edit-button' onClick={handleEditUserForm}>edit user</button>
-                <button className='reset-password-btn' onClick={handlePasswordResetForm}>reset password</button>
+                <div className="dashboard-user-btn">
+                     <button className='edit-button' onClick={handleEditUserForm}>edit user</button>
+                     <button className='reset-password-btn' onClick={handlePasswordResetForm}>reset password</button>
+                </div>
              </div>
-
+             {!showEditUserForm && !showResetPasswordForm && (
+                 <div className='list-created-group'>
+                 {createdBlogGroups.length > 0 && (
+                    <>
+                       <h2>created blog group</h2>
+                       <div className="list-created-blog-group">
+                             {createdBlogGroups instanceof Array && createdBlogGroups?.map(blogGroup => {
+                                return (
+                                   <div className="blog-group-card" key={blogGroup._id}>
+                                      <h4>{blogGroup.name}</h4>
+                                      <p>{blogGroup.description.slice(0, 103)}{blogGroup.description.length > 103 ? '...': ''}</p>
+                                      <a href={`/dashboard/blogs/groups/${blogGroup._id}/manage`}  className='manage-group-link'>manage group</a>
+                                   </div>
+                                )
+                             })}
+                       </div>
+                    </>
+                 )}
+              </div>
+             )}
              {showEditUserForm && !showResetPasswordForm && (
              <EditUserForm currentUser={currentUser}
              handleEditUserForm={handleEditUserForm}
@@ -65,24 +81,6 @@ function Dashboard() {
          <div className="content-right-sidebar">
             <div className="content-right-sidebar-content">
                   <>
-                     <div>
-                        {createdBlogGroups.length > 0 && (
-                           <>
-                              <h2>created blog group</h2>
-                              <div className="list-created-blog-group">
-                                    {createdBlogGroups instanceof Array && createdBlogGroups?.map(blogGroup => {
-                                       return (
-                                          <div className="blog-group-card" key={blogGroup._id}>
-                                             <h4>{blogGroup.name}</h4>
-                                             <p>{blogGroup.description.slice(0, 103)}{blogGroup.description.length > 103 ? '...': ''}</p>
-                                             <a href={`/dashboard/blogs/groups/${blogGroup._id}/manage`}  className='manage-group-link'>manage group</a>
-                                          </div>
-                                       )
-                                    })}
-                              </div>
-                           </>
-                        )}
-                     </div>
                      <div className="list-joined-groups-container">
                         {joinedGroups.length > 0 && (
                            <>
@@ -90,13 +88,17 @@ function Dashboard() {
                                  <div className="list-joined-groups">
                                        {joinedGroups.map(joinGroup => {
                                           return (
-                                             <a href="#" key={joinGroup._id}>
-                                                <div className="joined-group-card">
-                                                   <div className="joined-group-img">
-                                                      <img src={joinGroup?.blog_img.url} alt="" />
-                                                   </div>
+                                                <div className="joined-group-card" key={joinGroup._id}>
+                                                   <a href={`/blogs/${joinGroup._id}/posts/all`}>
+                                                      <div className="joined-group-img">
+                                                         <img src={joinGroup?.blog_img.url} alt="" />
+                                                      </div>
+                                                   </a>
+                                                   
                                                    <div>
+                                                      <a href={`/blogs/${joinGroup._id}/posts/all`}>
                                                          <p>{joinGroup.name}</p>
+                                                      </a>
                                                          {joinGroup.authors.includes(currentUser._id) && (
                                                             <div className='joined-group-author-links'>
                                                                <Link to={`/dashboard/blogs/groups/${joinGroup._id}/posts/new`}>write article</Link>
@@ -105,7 +107,6 @@ function Dashboard() {
                                                          )}
                                                    </div>
                                                 </div>
-                                             </a>
                                           )
                                        })}
                                  </div>

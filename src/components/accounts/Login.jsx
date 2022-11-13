@@ -31,7 +31,7 @@ function Login() {
                   </div>
                   <button>login</button>
               </form>
-              <Link to="/accounts/signin">Don't you have an account?</Link>
+              <Link to="/accounts/signin" className='form-auth-link'>Don't you have an account?</Link>
          </div>
         </div>
         <div className="content-right-sidebar">

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { fetchCategories } from '../../features/categorySlice'
 import { createBlogGroup } from '../../features/blogGroupSlice'
-import { Link } from 'react-router-dom'
+
 import '../css/Dashboard/AddGroup.css'
 import DashboardSideBar from './DashboardSideBar'
 function AddGroup() {
@@ -32,7 +32,7 @@ function AddGroup() {
           <DashboardSideBar/>
         <div className="content-main">
             <h2>Create blog group</h2>
-            <form action="" onSubmit={handleSubmit(handleDataSubmission)}>
+            <form action="" onSubmit={handleSubmit(handleDataSubmission)} className="form">
             <div className="form-div">
                     <input type="text" placeholder='name' aria-label='name'
                     {...register('name', { required: true })}

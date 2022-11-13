@@ -17,17 +17,18 @@ function EditUserForm({ currentUser, handleEditUserForm }) {
      navigate('/dashboard', { replace: true })
   }
   return (
-    <div>
-        <h2>Edit your account</h2>
-        <form onSubmit={handleSubmit}>
+    <div className='account-form-container'>
+        <h2 className='form-action-title'>Edit your account</h2>
+        <form onSubmit={handleSubmit} className="form">
              <div className="form-div">
                  <input type="text" aria-label='username' value={username} onChange={e => setUsername(e.target.value)} />
              </div>
-             <div className="two-fields">
+             <div className="form-div">
                  <input type="text" aria-label='first name'
                   value={firstName} onChange={e => setFirstName(e.target.value)} />
-
-                  <input type="text" aria-label='last name'
+             </div>
+             <div className="form-div">
+                 <input type="text" aria-label='last name'
                   value={lastName} onChange={e => setLastName(e.target.value)} />
              </div>
              <div className="form-div">

@@ -5,21 +5,27 @@ import '../css/Landing/ListCategory.css'
 
 function ListCategory() {
   const dispatch = useDispatch()
-  const categories = useSelector(state => state.categories.data)
+  const {status, data: categories} = useSelector(state => state.categories)
   useEffect(() => {
     dispatch(fetchCategories())
   }, [])
   return (
     <div className='list-categories'>
-    {categories.length > 0 && (
-        <div className='category-container-flex'>
-           {categories?.map(category => {
-             return (
-                <a href={`/blogs/all?category_name=${category?.name}`} className="category-link" key={category._id}>{category?.name}</a>
-             )
-           })}
-        </div>
-    )}
+      {status === 'pending' ? (
+         <div className='loader'>loading...</div>
+      ): (
+        <>
+           {categories.length > 0 && (
+              <div className='category-container-flex'>
+                {categories?.map(category => {
+                  return (
+                      <a href={`/blogs/all?category_name=${category?.name}`} className="category-link" key={category._id}>{category?.name}</a>
+                  )
+                })}
+              </div>
+            )}
+        </>
+      )}
     </div>
   )
 }

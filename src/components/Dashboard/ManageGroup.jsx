@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { FiHome, FiEdit, FiMonitor, FiPlus } from 'react-icons/fi'
 import { blogGroupPrivateDetail, deleteBlogGroup } from '../../features/blogGroupSlice'
 import EditGroupForm from './forms/EditGroupForm'
 import '../css/Dashboard/ManageGroup.css'
@@ -42,9 +41,11 @@ function ManageGroup() {
                     <div className="dashboard-blog-group-detail-text">
                         <h2>{blogGroup?.name}</h2>
                         <p>{blogGroup?.description}</p>
-                        <button onClick={handleEditForm}>edit group</button>
-                        <button onClick={handleAssignPermissionForm}>assign permissions</button>
-                        <button onClick={handleGroupDeletion}>delete group</button>
+                        <div className="manage-group-btns">
+                            <button onClick={handleEditForm} className="edit-group-btn">edit group</button>
+                            <button onClick={handleAssignPermissionForm} className="assign-permission-btn">assign permissions</button>
+                            <button onClick={handleGroupDeletion} className="delete-group-btn">delete group</button>
+                        </div>
                     </div>
                     </>
                 )}
@@ -52,7 +53,7 @@ function ManageGroup() {
         </div>
         
         <div className="content-right-sidebar">
-          <div className="content-right-sidebar-content">
+          <div className="content-right-sidebar-content manage-group-forms">
              {showEditForm && !showPermissionForm && (
                     <EditGroupForm blogGroup={blogGroup} blog_id={blog_id} />
                 )}

@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { listPostPrivate } from '../../features/postSlice'
 import { blogGroupDetail } from '../../features/blogGroupSlice'
-import { FiHome, FiEdit, FiMonitor, FiPlus } from 'react-icons/fi'
 import DashboardSideBar from './DashboardSideBar'
 import '../css/Dashboard/PostStyle.css'
 
@@ -24,7 +23,7 @@ function ListCreatedPosts() {
              <div className="created-post-container-grid-3">
                  {posts.map(post => {
                      return(
-                        <div className="created-post-card">
+                        <div className="created-post-card" key={post._id}>
                             <div className="created-post-img">
                                 <img src={post?.post_img.url} alt="" />
                             </div>
@@ -33,7 +32,7 @@ function ListCreatedPosts() {
                                 <p>{post?.introduction}</p>
                                  <div className="created-post-button">
                                     <a href={`/dashboard/groups/${blog_id}/posts/${post._id}/manage`}>edit article</a>
-                                    <button>delete article</button>
+                                    <button className='delete-article-btn'>delete article</button>
                                  </div>
                             </div>
                         </div>

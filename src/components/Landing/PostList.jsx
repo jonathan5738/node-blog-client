@@ -9,8 +9,8 @@ function PostList() {
   const { blog_id } = useParams()
   const currentUser = JSON.parse(localStorage.getItem(process.env.REACT_APP_USER_PROFILE))
   const dispatch = useDispatch()
-  const posts = useSelector(state => state.posts.data)
-  const blogGroup = useSelector(state => state.blogGroups.data)
+  const {status: postStatus, data: posts} = useSelector(state => state.posts)
+  const {status: blogGroupStatus, data: blogGroup} = useSelector(state => state.blogGroups)
   useEffect(() => {
      dispatch(blogGroupDetail(blog_id))
      dispatch(listPosts(blog_id))
@@ -32,22 +32,28 @@ function PostList() {
             <h2>{blogGroup?.name}</h2>
             <p>{blogGroup?.description}</p>
             <div className="post-container">
-                {posts?.map(post => {
-                    return (
-                        <a href={`/blogs/${blog_id}/posts/${post._id}`} key={post._id}>
-                            <div className="post-card">
-                                <div className="post-card-text">
-                                    <h3>{post?.title}</h3>
-                                    <p>{post?.introduction}</p>
-                                    <a href={`/blogs/${blog_id}/posts/${post._id}`} className='read-articles-link'>read post</a>
-                                </div>
-                                <div className="post-card-img">
-                                    <img src={post?.post_img?.url} alt="" />
-                                </div>
-                            </div>
-                        </a>
-                    )
-                })}
+                {posts?.length === 0 ? (
+                     <p>{blogGroup?.name} doesn't contain any post yet</p>
+                ): (
+                    <>
+                       {posts?.map(post => {
+                            return (
+                                <a href={`/blogs/${blog_id}/posts/${post._id}`} key={post._id}>
+                                    <div className="post-card">
+                                        <div className="post-card-text">
+                                            <h3>{post?.title}</h3>
+                                            <p>{post?.introduction}</p>
+                                            <a href={`/blogs/${blog_id}/posts/${post._id}`} className='read-articles-link'>read post</a>
+                                        </div>
+                                        <div className="post-card-img">
+                                            <img src={post?.post_img?.url} alt="" />
+                                        </div>
+                                    </div>
+                                </a>
+                            )
+                        })}
+                    </>
+                )}
             </div>
         </div>
         <div className="content-right-sidebar">

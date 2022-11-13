@@ -31,8 +31,8 @@ function ArticleForm({setEditPostForm,  postToEdit=null, blog_id=null }) {
   }
   return (
     <div>
-          <h3>Add article</h3>
-              <form action="" onSubmit={handleSubmit}>
+          <h3 className='form-action-title'>{postToEdit ? 'Edit': 'Write'} post</h3>
+              <form  onSubmit={handleSubmit} className="form">
                   <div className="form-div">
                       <input type="text" placeholder='title' value={title} onChange={e => setTitle(e.target.value)} />
                   </div>
@@ -40,7 +40,7 @@ function ArticleForm({setEditPostForm,  postToEdit=null, blog_id=null }) {
                       <input type="file" onChange={handleImage}/>
                   </div>
                   <div className="form-div">
-                      <textarea rows="5" placeholder='introduction' value={introduction} onChange={e => setIntroduction(e.target.value)}></textarea>
+                      <textarea rows="7" placeholder='introduction' value={introduction} onChange={e => setIntroduction(e.target.value)}></textarea>
                   </div>
                   <button>{postToEdit ? 'edit post': 'create post'}</button>
               </form>
