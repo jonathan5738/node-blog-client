@@ -6,6 +6,8 @@ import { joinedGroupReducer } from '../features/joinedGroupSlice'
 import { postReducer } from '../features/postSlice'
 import { relatedPostReducer } from '../features/relatedPostSlice'
 import { commentReducer } from '../features/commentSlice'
+import { numberPostReducer } from '../features/numberPostSlice'
+import { numberBlogGroupReducer } from '../features/numberBlogGroupSlice'
 
 export default configureStore({
     reducer: {
@@ -15,6 +17,8 @@ export default configureStore({
         joinedGroups: joinedGroupReducer,
         posts: postReducer,
         relatedPosts: relatedPostReducer,
-        comments: commentReducer
+        comments: commentReducer,
+        postCount: numberPostReducer,
+        blogGroupCount: numberBlogGroupReducer
     }
 })

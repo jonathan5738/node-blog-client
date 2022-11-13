@@ -8,7 +8,7 @@
     padding-bottom: 8rem;
     
     position: relative;
-    z-index: 1500;
+    z-index: 2500;
 }
 /* .content-left-sidebar { 
     border-right: 1px solid #eee;
@@ -24,11 +24,12 @@
 .content-left-sidebar-content {
     padding-left: 3.5rem;
     padding-top: 15rem;
-    z-index: 2000;
+    z-index: 1900;
 }
 .content-right-sidebar-content {
     padding: 0 4rem;
     padding-top: 5rem;
+    z-index: 2000;
 }
 .content-main h2 { font-size: 1.6rem; }
 
@@ -63,7 +64,12 @@
         box-shadow: 0 2rem 3rem 0 #d6d6d649;
         background-color: #fff;
     }
-
+    .content-main {
+        z-index: 1500;
+    }
+    .content-right-sidebar-content {
+        z-index: 1500;
+    }
 }
 
 @media(max-width: 688px){

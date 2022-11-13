@@ -1,24 +1,31 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector} from 'react-redux'
 import { topFiveBlogGroups } from '../../features/blogGroupSlice'
 import { fetchAllPosts } from '../../features/postSlice'
 import { fetchCategories } from '../../features/categorySlice'
+import { fetchAllPostCount } from '../../features/numberPostSlice'
 import { logoutUser } from '../../features/accountSlice'
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import '../css/Landing/Landing.css'
 
 function Landing() {
   const dispatch = useDispatch()
   const currentUser = JSON.parse(localStorage.getItem(process.env.REACT_APP_USER_PROFILE))
+  const [skipParam, setSkipParam] = useState(0)
   const navigate = useNavigate()
   useEffect(() => {
      dispatch(topFiveBlogGroups())
-     dispatch(fetchAllPosts())
      dispatch(fetchCategories())
+    //  dispatch(fetchAllPostCount())
   }, [])
+  useEffect(() => {
+    dispatch(fetchAllPosts(skipParam))
+  }, [skipParam])
   const blogGroups = useSelector(state => state.blogGroups.data) 
   const posts = useSelector(state => state.posts.data)
   const {status, data: categories} = useSelector(state => state.categories)
+  // const postCount = useSelector(state => state.postCount.data)
   const handleLogout = () => {
       dispatch(logoutUser())
       navigate('/', { replace: true})
@@ -104,6 +111,20 @@ function Landing() {
                      )
                   })}
                </div>
+               
+               <div className="pagination-container">
+                  <div className="pagination-links">
+                      {skipParam >= 0 && (
+                          <FiArrowLeft size={20} color={'#868e96'} className='pagination-left'
+                          onClick={() => setSkipParam(prev => prev - 5)}/>
+                      )}
+                      {posts.length > 1  && (
+                          <FiArrowRight size={20} color={'#868e96'} className='pagination-right'
+                          onClick={() => setSkipParam(prev => prev + 5)}/>
+                      )}
+                  </div>
+               </div>
+          
           </div>
           <div className="landing-category-list">
               <h2>Discover more of what matters to you</h2>

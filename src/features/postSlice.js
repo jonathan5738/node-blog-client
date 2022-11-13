@@ -170,6 +170,18 @@ const postSlice = createSlice({
           state.status = 'failed'
           state.error = 'unable to fetch all posts'
       })
+
+      .addCase(searchListPosts.fulfilled, (state, action) => {
+        state.data = action.payload 
+        state.status = 'succeed'
+      })
+      .addCase(searchListPosts.pending, (state) => {
+          state.status = 'pending'
+      })
+      .addCase(searchListPosts.rejected, (state) => {
+          state.status = 'failed'
+          state.error = 'unable to fetch all posts'
+      })
     }
 })
 export const postReducer = postSlice.reducer 
@@ -177,8 +189,8 @@ export const createPost = createAsyncThunk('posts/createPost', async({blog_id, d
     const response = await API.post(`/blogs/${blog_id}/posts/new`, data)
     return response.data
 })
-export const listPosts = createAsyncThunk('posts/listPosts', async(blog_id) => {
-    const response = await API.get(`/blogs/${blog_id}/posts/all`)
+export const listPosts = createAsyncThunk('posts/listPosts', async({blog_id, skipParam=null}) => {
+    const response = await API.get(`/blogs/${blog_id}/posts/all?skipParam=${skipParam || 0}`)
     return response.data
 })
 export const editPost = createAsyncThunk('posts/editPost', async ({blog_id, post_id, data}) => {
@@ -195,8 +207,8 @@ export const likePost = createAsyncThunk('posts/likePost', async ({blog_id, post
     return response.data
 })
 
-export const fetchAllPosts = createAsyncThunk('posts/fetchAllPosts', async () => {
-    const response = await API.get('/blogs/all/posts')
+export const fetchAllPosts = createAsyncThunk('posts/fetchAllPosts', async (skipParam) => {
+    const response = await API.get(`/blogs/all/posts?skipParam=${skipParam || 0}`)
     return response.data
   })
 
@@ -211,6 +223,10 @@ export const addParagraph = createAsyncThunk('posts/addParagraph', async ({blog_
 })
 export const editParagraph = createAsyncThunk('posts/editParagraph', async ({blog_id, post_id, data}) => {
     const response = await API.patch(`/blogs/${blog_id}/posts/${post_id}/paragraph/edit`, data)
+    return response.data
+})
+export const searchListPosts = createAsyncThunk('blogGroups/searchListPosts', async ({blog_id, searchTerm}) => {
+    const response = await API.post(`/blogs/${blog_id}/posts/all/search`, {searchTerm})
     return response.data
 })
 

@@ -36,7 +36,6 @@ function BlogGroupList() {
   const handlejoinBlogGroup = (blog_id, user_id) => {
      dispatch(joinBlogGroup({blog_id, user_id, category_name}))
   }
-  console.log(categories)
   return (
     <div className='content-container'>
         <div className="content-left-sidebar">

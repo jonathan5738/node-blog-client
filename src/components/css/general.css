@@ -245,6 +245,23 @@ h3.paragraph-subtitle {
 .delete-group-btn {
     background-color: #f03e3e;
 }
+.landing-post-list {
+    position: relative;
+}
+.pagination-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+}
+.pagination-links {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+.pagination-right:hover, .pagination-left:hover {
+    cursor: pointer;
+}
 
 @media(max-width: 848px){
     .manage-group-forms{

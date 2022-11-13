@@ -1,14 +1,17 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { loginUser } from '../../features/accountSlice'
 import DashboardSideBar from '../Dashboard/DashboardSideBar'
 import { Link } from 'react-router-dom'
 function Login() { 
   const { register, handleSubmit, formState: { errors }} = useForm()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const handleSubmittedData = data => {
       dispatch(loginUser(data))
+      navigate('/', { replace: true})
   }
   return (
     <div className='content-container'>

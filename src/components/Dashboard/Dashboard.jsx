@@ -3,26 +3,36 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchProfile } from '../../features/accountSlice'
 import { listBlogGroupPrivate } from '../../features/blogGroupSlice'
 import { fectchJoinedGroups } from '../../features/joinedGroupSlice'
+import { fetchPrivateBlogGroupNumber } from '../../features/numberBlogGroupSlice'
 
 import EditUserForm from '../accounts/EditUserForm'
 import ResetPassword from '../accounts/ResetPassword'
 import '../css/Dashboard/Dashboard.css'
 import { Link } from 'react-router-dom'
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi"
 import DashboardSideBar from './DashboardSideBar'
 
 
 function Dashboard() {
   const dispatch = useDispatch()
+  const [skipParam, setSkipParam] = useState(0)
   const currentUser = useSelector(state => state.accounts.data)
-  const createdBlogGroups = useSelector(state => state.blogGroups.data)
+  const createdBlogGroups  = useSelector(state => state.blogGroups.data)
   const joinedGroups = useSelector(state => state.joinedGroups.data)
+  const BlogGroupCount = useSelector(state => state.blogGroupCount.data)
   const [showEditUserForm, setEditUserForm] = useState(false)
   const [showResetPasswordForm, setShowResetPasswordForm] = useState(false)
   useEffect(() => {
      dispatch(fetchProfile())
      dispatch(listBlogGroupPrivate())
      dispatch(fectchJoinedGroups())
+     dispatch(fetchPrivateBlogGroupNumber())
   }, [])
+
+  useEffect(() => {
+       dispatch(listBlogGroupPrivate(skipParam))
+   }, [skipParam])
+   
   const handleEditUserForm = () =>{
      setShowResetPasswordForm(false)
      setEditUserForm(prev => !prev)
@@ -31,7 +41,6 @@ function Dashboard() {
      setEditUserForm(false)
      setShowResetPasswordForm(prev => !prev)
   }
-
   return (
     <div className='content-container'>
         <DashboardSideBar/>
@@ -65,6 +74,20 @@ function Dashboard() {
                        </div>
                     </>
                  )}
+                  {BlogGroupCount > createdBlogGroups?.length && (
+                     <div className="pagination-container">
+                        <div className="pagination-links">
+                           {skipParam >= 1 && (
+                              <FiArrowLeft size={20} color={'#868e96'} className='pagination-left'
+                              onClick={() => setSkipParam(prev => prev - 3)}/>
+                           )}
+                           {createdBlogGroups?.length > 0 && (
+                              <FiArrowRight size={20} color={'#868e96'} className='pagination-right'
+                              onClick={() => setSkipParam(prev => prev + 3)}/>
+                           )}
+                        </div>
+                    </div>
+                  )}
               </div>
              )}
              {showEditUserForm && !showResetPasswordForm && (

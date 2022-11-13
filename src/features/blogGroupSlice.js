@@ -184,8 +184,8 @@ export const blogGroupDetail = createAsyncThunk('blogGroups/blogGroupDetail', as
     const response = await API.get(`/blogs/${blog_id}/detail`)
     return response.data
 })
-export const listBlogGroupPrivate = createAsyncThunk('blogGroups/listBlogGroupPrivate', async () => {
-    const response = await API.get('/blogs/private/all')
+export const listBlogGroupPrivate = createAsyncThunk('blogGroups/listBlogGroupPrivate', async (skipParam=null) => {
+    const response = await API.get(`/blogs/private/all?skipParam=${skipParam || 0}`)
     return response.data
 })
 export const editBlogGroup = createAsyncThunk('blogGroups/editBlogGroup', async({blog_id, data}) => {
