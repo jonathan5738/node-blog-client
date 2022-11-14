@@ -193,6 +193,10 @@ export const listPosts = createAsyncThunk('posts/listPosts', async({blog_id, ski
     const response = await API.get(`/blogs/${blog_id}/posts/all?skipParam=${skipParam || 0}`)
     return response.data
 })
+export const fetchAllPosts = createAsyncThunk('posts/fetchAllPosts', async (skipParam=null) => {
+    const response = await API.get(`/blogs/all/posts?skipParam=${skipParam || 0}`)
+    return response.data
+})
 export const editPost = createAsyncThunk('posts/editPost', async ({blog_id, post_id, data}) => {
     const response = await API.patch(`/blogs/${blog_id}/posts/${post_id}/edit`, data)
     return response.data
@@ -206,11 +210,6 @@ export const likePost = createAsyncThunk('posts/likePost', async ({blog_id, post
     const response = await API.get(`/blogs/${blog_id}/posts/${post_id}/like`)
     return response.data
 })
-
-export const fetchAllPosts = createAsyncThunk('posts/fetchAllPosts', async (skipParam) => {
-    const response = await API.get(`/blogs/all/posts?skipParam=${skipParam || 0}`)
-    return response.data
-  })
 
 export const dislikePost = createAsyncThunk('posts/dislikePost', async ({blog_id, post_id}) => {
     const response = await API.get(`/blogs/${blog_id}/posts/${post_id}/dislike`)
