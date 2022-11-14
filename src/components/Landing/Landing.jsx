@@ -116,11 +116,11 @@ function Landing() {
                   <div className="pagination-links">
                       {skipParam >= 0 && (
                           <FiArrowLeft size={20} color={'#868e96'} className='pagination-left'
-                          onClick={() => setSkipParam(prev => prev - 5)}/>
+                          onClick={() => setSkipParam(prev => prev - 4)}/>
                       )}
                       {posts.length > 1  && (
                           <FiArrowRight size={20} color={'#868e96'} className='pagination-right'
-                          onClick={() => setSkipParam(prev => prev + 5)}/>
+                          onClick={() => setSkipParam(prev => prev + 4)}/>
                       )}
                   </div>
                </div>
@@ -141,6 +141,19 @@ function Landing() {
              </div>
           </div>
           
+      </section>
+      
+      <section className="our-story">
+           <div className="our-story-text">
+              <h2>Start Writting. <br /> Expending your world</h2>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                 Aut esse asperiores dicta officiis ut consectetur, libero 
+                 delectus cumque impedit, sint assumenda unde tempora perspiciatis
+                 voluptates aspernatur necessitatibus? Quos, blanditiis? Saepe?</p>
+           </div>
+           <div className="our-story-img">
+              <img src="https://images.pexels.com/photos/4048775/pexels-photo-4048775.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
+           </div>
       </section>
      </>
   )
