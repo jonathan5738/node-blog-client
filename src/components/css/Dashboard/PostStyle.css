@@ -4,6 +4,8 @@
 }
 .dashboard-post-main-content {
     padding: 0 3rem;
+    position: relative;
+    z-index: 2000;
 }
 .dashboard-post-main-content h2 {
     font-size: 3rem;
@@ -103,6 +105,9 @@
     background-color: #000;
 }
 @media(max-width: 700px){
+    .dashboard-post-main-content {
+        z-index: 1000;
+    }
     .dashboard-post-main-title {
         font-size: 1.6rem;
         padding-bottom: 1.6rem;
